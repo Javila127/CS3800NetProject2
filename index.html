@@ -7,10 +7,12 @@
 </head>
 <body>
     <h1>Welcome to Simple Shopping Cart</h1>
-    <form action="server.py" method="post">
-        <label for="item">Item:</label>
-        <input type="text" id="item" name="item">
-        <input type="submit" value="Add to Cart">
-    </form>
+    <h2>Available Items:</h2>
+    <ul>
+        <li>Item 1 <form action="server.py" method="post"><input type="hidden" name="item" value="Item 1"><input type="number" name="quantity" value="1" min="1"><input type="submit" value="Add to Cart"></form></li>
+        <li>Item 2 <form action="server.py" method="post"><input type="hidden" name="item" value="Item 2"><input type="number" name="quantity" value="1" min="1"><input type="submit" value="Add to Cart"></form></li>
+        <li>Item 3 <form action="server.py" method="post"><input type="hidden" name="item" value="Item 3"><input type="number" name="quantity" value="1" min="1"><input type="submit" value="Add to Cart"></form></li>
+    </ul>
+    <p><a href="cart.html">View Shopping Cart</a></p>
 </body>
 </html>
