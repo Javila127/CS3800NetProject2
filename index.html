@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Shopping Cart</title>
+    <title>Shopping Cart</title>
 </head>
 <body>
-    <h1>Welcome to Simple Shopping Cart</h1>
-    <h2>Available Items:</h2>
+    <h1>Products</h1>
     <ul>
-        <li>Item 1 <form action="server.py" method="post"><input type="hidden" name="item" value="Item 1"><input type="number" name="quantity" value="1" min="1"><input type="submit" value="Add to Cart"></form></li>
-        <li>Item 2 <form action="server.py" method="post"><input type="hidden" name="item" value="Item 2"><input type="number" name="quantity" value="1" min="1"><input type="submit" value="Add to Cart"></form></li>
-        <li>Item 3 <form action="server.py" method="post"><input type="hidden" name="item" value="Item 3"><input type="number" name="quantity" value="1" min="1"><input type="submit" value="Add to Cart"></form></li>
+        {% for product in products.values() %}
+        <li>{{ product.name }} - ${{ product.price }}
+            <a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
+        </li>
+        {% endfor %}
     </ul>
-    <p><a href="cart.html">View Shopping Cart</a></p>
 </body>
 </html>

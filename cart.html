@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+    <title>Your Cart</title>
 </head>
 <body>
-    <h1>Shopping Cart</h1>
+    <h1>Your Shopping Cart</h1>
     <ul>
-        <!-- Shopping cart items will be dynamically generated here -->
+        {% for product in cart %}
+        <li>{{ product.name }} - ${{ product.price }}</li>
+        {% else %}
+        <li>Your cart is empty.</li>
+        {% endfor %}
     </ul>
-    <p><a href="index.html">Continue Shopping</a> | <a href="confirmation.html">Proceed to Checkout</a></p>
 </body>
 </html>
