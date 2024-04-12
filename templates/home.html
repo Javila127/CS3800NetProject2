@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Shopping Cart</title>
+    <title>Home</title>
 </head>
 <body>
-    <h1>Products</h1>
-    <ul>
-        {% for product in products.values() %}
-        <li>{{ product.name }} - ${{ product.price }}
-            <a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
-        </li>
-        {% endfor %}
-    </ul>
+    <h1>Items for Sale</h1>
+    <form action="/add_to_cart/item1" method="POST">
+        <p>Item 1: $10.99 <input type="number" name="quantity" value="1" min="1"></p>
+        <button type="submit">Add to Cart</button>
+    </form>
+    <form action="/add_to_cart/item2" method="POST">
+        <p>Item 2: $20.99 <input type="number" name="quantity" value="1" min="1"></p>
+        <button type="submit">Add to Cart</button>
+    </form>
+    <form action="/add_to_cart/item3" method="POST">
+        <p>Item 3: $30.99 <input type="number" name="quantity" value="1" min="1"></p>
+        <button type="submit">Add to Cart</button>
+    </form>
 </body>
 </html>

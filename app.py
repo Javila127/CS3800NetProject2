@@ -1,33 +1,56 @@
-from flask import Flask, render_template, redirect, url_for, session
-import os
+from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(24)  # Set a random secret key
+app.secret_key = 'supersecretkey'
 
-# Sample product data
-products = {
-    1: {'id': 1, 'name': 'Product 1', 'price': 10.99},
-    2: {'id': 2, 'name': 'Product 2', 'price': 20.99},
-    3: {'id': 3, 'name': 'Product 3', 'price': 30.99}
+items = {
+    'item1': {'name': 'Item 1', 'price': 10.99},
+    'item2': {'name': 'Item 2', 'price': 20.99},
+    'item3': {'name': 'Item 3', 'price': 30.99}
 }
 
 @app.route('/')
 def home():
-    return render_template('home.html', products=products)
+    return render_template('home.html', items=items)
 
-@app.route('/add_to_cart/<int:product_id>')
-def add_to_cart(product_id):
-    product = products.get(product_id)
-    if product:
-        if 'cart' not in session:
-            session['cart'] = []
-        session['cart'].append(product)
-        session.modified = True
-    return redirect(url_for('home'))
+@app.route('/add_to_cart/<item_key>', methods=['POST'])
+def add_to_cart(item_key):
+    if 'cart' not in session:
+        session['cart'] = {}
+
+    quantity = int(request.form['quantity'])
+    if item_key in session['cart']:
+        session['cart'][item_key] += quantity
+    else:
+        session['cart'][item_key] = quantity
+
+    session.modified = True  
+    return redirect(url_for('cart'))
 
 @app.route('/cart')
-def show_cart():
-    return render_template('cart.html', cart=session.get('cart', []))
+def cart():
+    total_cost = sum(items[key]['price'] * quantity for key, quantity in session.get('cart', {}).items())
+    return render_template('cart.html', cart=session.get('cart', {}), items=items, total_cost=total_cost)
 
-if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+@app.route('/confirmation')
+def confirmation():
+    total_cost = sum(items[key]['price'] * quantity for key, quantity in session.get('cart', {}).items())
+    return render_template('confirmation.html', total_cost=total_cost)
+
+@app.route('/confirm_order')
+def confirm_order():
+    session.pop('cart', None)
+    return render_template('order_received.html')
+
+@app.route('/cancel_order')
+def cancel_order():
+    session.pop('cart', None)
+    return redirect(url_for('home'))
+
+@app.route('/clear_cart')
+def clear_cart():
+    session.pop('cart', None)
+    return redirect(url_for('home'))
+
+if __name__ == '__main__':
+    app.run(debug=True, port = 8000)

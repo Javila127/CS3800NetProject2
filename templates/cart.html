@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Your Cart</title>
+    <title>Cart</title>
 </head>
 <body>
-    <h1>Your Shopping Cart</h1>
-    <ul>
-        {% for product in cart %}
-        <li>{{ product.name }} - ${{ product.price }}</li>
-        {% else %}
-        <li>Your cart is empty.</li>
+    <h1>Shopping Cart</h1>
+    <table border="1">
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        {% for key, quantity in cart.items() %}
+        <tr>
+            <td>{{ items[key]['name'] }}</td>
+            <td>{{ quantity }}</td>
+            <td>${{ items[key]['price'] }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
+    <p>Total Cost: ${{ total_cost }}</p>
+    <a href="/confirmation">Continue to Checkout</a>
+    <a href="/">Continue Shopping</a>
+    <a href="/clear_cart">Clear Cart</a>
 </body>
 </html>
