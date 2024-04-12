@@ -1,4 +1,3 @@
-To run/test program, using the following command in your terminal:
-python -m http.server
-
-Then proceed to http://localhost:8000/ in your browser 
+To run/test program: 
+1:execute app.py 
+2:proceed to http://127.0.0.1:8000 in your browser 
