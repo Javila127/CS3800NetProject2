@@ -27,11 +27,7 @@ def add_to_cart(product_id):
 
 @app.route('/cart')
 def show_cart():
-    # Uncomment below when 'cart.html' template is available
-    # return render_template('cart.html', cart=session.get('cart', []))
-    return str(session.get('cart', []))  # Temporary solution for demonstration
+    return render_template('cart.html', cart=session.get('cart', []))
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
-
-    #test
