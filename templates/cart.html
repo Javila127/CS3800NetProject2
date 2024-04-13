@@ -67,6 +67,21 @@
         .checkout-options a:hover {
             background-color: #0056b3;
         }
+        form {
+            display: inline;
+        }
+        form button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -77,12 +92,18 @@
                 <th>Item</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Remove Item</th>
             </tr>
             {% for key, quantity in cart.items() %}
             <tr>
                 <td>{{ items[key]['name'] }}</td>
                 <td>{{ quantity }}</td>
                 <td>${{ items[key]['price'] }}</td>
+                <td>
+                    <form action="/remove_from_cart/{{ key }}" method="POST">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </table>

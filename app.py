@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -31,6 +31,15 @@ def add_to_cart(item_key):
         session['cart'][item_key] = quantity
 
     session.modified = True  # Mark session as modified
+    flash(f'{items[item_key]["name"]} added to cart!', 'success')
+    return redirect(url_for('home'))
+
+# Route for removing items from the cart
+@app.route('/remove_from_cart/<item_key>', methods=['POST'])
+def remove_from_cart(item_key):
+    if 'cart' in session and item_key in session['cart']:
+        session['cart'].pop(item_key)
+        session.modified = True  # Mark session as modified
     return redirect(url_for('cart'))
 
 # Route for displaying the cart
@@ -70,4 +79,4 @@ def clear_cart():
 
 if __name__ == '__main__':
     # Run the application in debug mode on port 8000
-    app.run(debug=True, port = 8000)
+    app.run(debug=True, port=8000)

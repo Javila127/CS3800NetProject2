@@ -84,6 +84,17 @@
         .view-cart a:hover {
             background-color: #0056b3;
         }
+        .flash-messages {
+            margin-bottom: 20px;
+            background-color: #ffffff00;
+            color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0);
+        }
+        .flash-message {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +115,24 @@
                 <p>Item 3: $30.99 <input type="number" name="quantity" value="1" min="1"> <button type="submit">Add to Cart</button></p>
             </form>
         </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+            <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        <script>
+            // JavaScript to hide flash messages after 2.5 seconds
+            setTimeout(function() {
+                var flashMessages = document.querySelector('.flash-messages');
+                if (flashMessages) {
+                    flashMessages.style.display = 'none';
+                }
+            }, 2500);
+        </script>
+        {% endif %}
+        {% endwith %}
         <div class="view-cart">
             <a href="/cart">View Cart</a>
         </div>
