@@ -1,13 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+        h1 {
+            margin-bottom: 40px;
+            color: #333;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .total-cost {
+            margin-bottom: 40px;
+            font-size: 24px;
+            color: #555;
+        }
+        .confirmation-options {
+            display: flex;
+            justify-content: center;
+        }
+        .confirmation-options a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-right: 20px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .confirmation-options a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Confirmation Page</h1>
-    <p>Total Cost: ${{ total_cost }}</p>
-    <a href="/confirm_order">Confirm Order</a>
-    <a href="/cancel_order">Cancel Order</a>
-    <a href="/">Continue Shopping</a>
+    <div class="container">
+        <h1>Confirmation Page</h1>
+        <p class="total-cost">Total Cost: ${{ total_cost }}</p>
+        <div class="confirmation-options">
+            <a href="/confirm_order">Confirm Order</a>
+            <a href="/cancel_order">Cancel Order</a>
+            <a href="/">Continue Shopping</a>
+        </div>
+    </div>
 </body>
 </html>

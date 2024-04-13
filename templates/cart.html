@@ -1,27 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+        h1 {
+            margin-bottom: 40px;
+            color: #333;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+        th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .total-cost {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        .checkout-options {
+            display: flex;
+            justify-content: center;
+        }
+        .checkout-options a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-right: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .checkout-options a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Shopping Cart</h1>
-    <table border="1">
-        <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-        </tr>
-        {% for key, quantity in cart.items() %}
-        <tr>
-            <td>{{ items[key]['name'] }}</td>
-            <td>{{ quantity }}</td>
-            <td>${{ items[key]['price'] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <p>Total Cost: ${{ total_cost }}</p>
-    <a href="/confirmation">Continue to Checkout</a>
-    <a href="/">Continue Shopping</a>
-    <a href="/clear_cart">Clear Cart</a>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            {% for key, quantity in cart.items() %}
+            <tr>
+                <td>{{ items[key]['name'] }}</td>
+                <td>{{ quantity }}</td>
+                <td>${{ items[key]['price'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p class="total-cost">Total Cost: ${{ total_cost }}</p>
+        <div class="checkout-options">
+            <a href="/confirmation">Continue to Checkout</a>
+            <a href="/">Continue Shopping</a>
+            <a href="/clear_cart">Clear Cart</a>
+        </div>
+    </div>
 </body>
 </html>
